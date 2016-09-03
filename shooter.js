@@ -10,7 +10,7 @@ class PlayState {
     this.load.image('bxtrm',beexterm.png);
   }
   create() {
-    this.bxtrm = this.add.sprite(100,200,'bxtrm';
+    this.bxtrm = this.add.sprite(100,200,'bxtrm');
   }
 
 
