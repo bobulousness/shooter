@@ -17,5 +17,5 @@ class Boot {
 
 
 var game = new Phaser.Game(320,568);
-game.state.add('play', Boot.Play);
-game.state.start('play');
+game.state.add('Play', Boot);
+game.state.start('Play');
