@@ -1,6 +1,6 @@
 'use strict';
 
-class PlayState {
+class Shooter {
 
   init() {
     //creating variables
@@ -17,5 +17,5 @@ class PlayState {
 
 
 var game = new Phaser.Game(320,568);
-game.state.add('play', PlayState.Play);
+game.state.add('play', Shooter.Play);
 game.state.start('play');
