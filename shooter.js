@@ -1,6 +1,14 @@
 'use strict';
 
+class PlayState {
 
+  init() {
+    //creating variables
+
+  }
+  preload() {
+    this.load.image('bxtrm',beexterm.png);
+  }
 
 
 
