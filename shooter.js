@@ -1,4 +1,4 @@
-'use strict';
+'us strict';
 
 class Boot {
 
@@ -10,7 +10,7 @@ class Boot {
     this.load.image('bxtrm','beexterm.png');
   }
   create() {
-    this.bxtrm = this.add.sprite(160,400,'bxtrm');
+    this.bxtrm = this.add.sprite(140,400,'bxtrm');
   }
 
 }
