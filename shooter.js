@@ -10,7 +10,7 @@ class Boot {
     this.load.image('bxtrm','beexterm.png');
   }
   create() {
-    this.bxtrm = this.add.sprite(100,400,'bxtrm');
+    this.bxtrm = this.add.sprite(160,400,'bxtrm');
   }
 
 }
