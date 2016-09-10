@@ -18,7 +18,7 @@ class Boot {
   }
   create() {
     //physics
-    game.physics.startSystem(Phaser.Physics.P2JS);
+    game.physics.startSystem(Phaser.Physics.p2);
     //player
     player = this.add.sprite(140,400,'bxtrm');
     game.physics.p2.enable(player);
@@ -26,7 +26,7 @@ class Boot {
     //enemies
     this.badguys(40,30);
   }
-  update () {
+  update() {
     if (this.cursors.left.isDown) {
       player.body.x -= 3;
     }
