@@ -27,10 +27,10 @@ class Boot {
   }
   update () {
     if (this.cursors.left.isDown) {
-      this.player.body.velocity.x -= 3;
+      this.player.body.x -= 3;
     }
     if (this.cursors.right.isDown) {
-      this.player.body.velocity.x += 3;
+      this.player.body.x += 3;
     }
   }
 
