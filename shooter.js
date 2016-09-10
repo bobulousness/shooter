@@ -14,7 +14,7 @@ class Boot {
   }
   badguys(x,y) {
     this.btrfly = this.add.sprite(x,y,'btrfly');
-    this.btrfly = this.add.sprite(x += 41, y, 'btrfly');
+    this.btrfly = this.add.sprite(x += 46, y, 'btrfly');
   }
   create() {
     this.bxtrm = this.add.sprite(140,400,'bxtrm');
