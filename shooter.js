@@ -18,7 +18,7 @@ class Boot {
   }
   create() {
     this.bxtrm = this.add.sprite(140,400,'bxtrm');
-    badguys(10,10);
+    this.badguys(10,10);
   }
 
 }
