@@ -32,7 +32,6 @@ class Boot {
     if (this.cursors.right.isDown) {
       this.player.body.velocity.x += 3;
     }
-    }
   }
 
 }
