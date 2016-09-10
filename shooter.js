@@ -1,4 +1,4 @@
-'us strict';
+'use strict';
 
 class Boot {
 
