@@ -8,6 +8,9 @@ class Boot {
   }
   preload() {
     this.load.image('bxtrm','beexterm.png');
+    this.load.image('bgud','bulgd.png');
+    this.load.image('bbad','bulbd.png');
+    this.load.image('btrfly','btrfly.png');
   }
   create() {
     this.bxtrm = this.add.sprite(140,400,'bxtrm');
