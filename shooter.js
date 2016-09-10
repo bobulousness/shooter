@@ -20,7 +20,7 @@ class Boot {
     //physics
     game.physics.startSystem(Phaser.Physics.p2);
     //player
-    player = this.add.sprite(140,400,'bxtrm');
+    var player = this.add.sprite(140,400,'bxtrm');
     game.physics.p2.enable(player);
     this.cursors = game.input.keyboard.createCursorKeys();
     //enemies
