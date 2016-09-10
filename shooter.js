@@ -21,7 +21,7 @@ class Boot {
     game.physics.startSystem(Phaser.Physics.P2JS);
     //player
     this.player = this.add.sprite(140,400,'bxtrm');
-    game.physics.P2JS.enable(this.player);
+    game.physics.P2JS.enable(player);
     this.cursors = game.input.keyboard.createCursorKeys();
     //enemies
     this.badguys(40,30);
