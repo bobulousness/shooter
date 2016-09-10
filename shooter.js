@@ -20,7 +20,7 @@ class Boot {
     //physics
     game.physics.startSystem(Phaser.Physics.P2JS);
     //player
-    this.player = this.add.sprite(140,400,'bxtrm');
+    player = this.add.sprite(140,400,'bxtrm');
     game.physics.p2.enable(player);
     this.cursors = game.input.keyboard.createCursorKeys();
     //enemies
@@ -28,10 +28,10 @@ class Boot {
   }
   update () {
     if (this.cursors.left.isDown) {
-      this.player.body.x -= 3;
+      player.body.x -= 3;
     }
     if (this.cursors.right.isDown) {
-      this.player.body.x += 3;
+      player.body.x += 3;
     }
   }
 
