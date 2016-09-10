@@ -12,6 +12,10 @@ class Boot {
     this.load.image('bbad','bulbd.png');
     this.load.image('btrfly','btrfly.png');
   }
+  badguys(x,y) {
+    this.btrfly = this.add.sprite(x,y,'btrfly');
+    this.btrfly = this.add.sprite(x += 41, y, 'btrfly');
+  }
   create() {
     this.bxtrm = this.add.sprite(140,400,'bxtrm');
   }
