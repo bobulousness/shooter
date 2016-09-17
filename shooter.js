@@ -13,8 +13,8 @@ class Boot {
     this.load.image('btrfly','btrfly.png');
   }
   badguys(x,y) {
-    this.btrfly = game.add.sprite(x,y,'btrfly');
-    this.btrfly = game.add.sprite(x += 46, y, 'btrfly');
+    this.btrfly = this.add.sprite(x,y,'btrfly');
+    //this.btrfly = game.add.sprite(x += 46, y, 'btrfly');
   }
   
   
