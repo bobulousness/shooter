@@ -13,7 +13,7 @@ class Boot {
     this.load.image('btrfly','btrfly.png');
   }
   badguys(x,y) {
-    this.btrfly = this.add.sprite(x,y,'btrfly');
+    this.btrfly = game.add.sprite(x,y,'btrfly');
     //this.btrfly = game.add.sprite(x += 46, y, 'btrfly');
   }
   
@@ -27,7 +27,8 @@ class Boot {
     game.physics.p2.enable(this.player);
     this.cursors = game.input.keyboard.createCursorKeys();
     //enemies
-    this.badguys(40,30);
+    //this.badguys(40,30);
+    this.btrfly = game.add.sprite(40,30,'btrfly');
   }
   update() {
     if (this.cursors.left.isDown) {
