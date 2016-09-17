@@ -18,9 +18,9 @@ class Boot {
   }
   create() {
     //physics
-    game.physics.startSystem(Phaser.Physics.p2);
+    game.physics.startSystem(Phaser.Physics.P2JS);
     //player
-    this.char = this.add.sprite(140,400,'bxtrm');
+    var char = this.add.sprite(140,400,'bxtrm');
     console.log(this.char);
     game.physics.p2.enable(this.char);
     this.cursors = game.input.keyboard.createCursorKeys();
