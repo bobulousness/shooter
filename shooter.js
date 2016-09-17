@@ -21,6 +21,7 @@ class Boot {
     game.physics.startSystem(Phaser.Physics.p2);
     //player
     this.char = this.add.sprite(140,400,'bxtrm');
+    game.physics.p2.enable(this.char);
     //var Player = this.add.sprite(140,400,'bxtrm');
     ///game.physics.p2.enable(Player);
     this.cursors = game.input.keyboard.createCursorKeys();
