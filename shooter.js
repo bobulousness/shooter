@@ -20,19 +20,19 @@ class Boot {
     //physics
     game.physics.startSystem(Phaser.Physics.P2JS);
     //player
-    this.char = game.add.sprite(140,400,'bxtrm');
-    console.log(this.char);
-    game.physics.p2.enable(this.char);
-    var cursors = game.input.keyboard.createCursorKeys();
+    this.player = game.add.sprite(140,400,'bxtrm');
+    console.log(this.player);
+    game.physics.p2.enable(this.player);
+    this.cursors = game.input.keyboard.createCursorKeys();
     //enemies
     this.badguys(40,30);
   }
   update() {
-    if (cursors.left.isDown) {
-      player.body.x -= 3;
+    if (this.cursors.left.isDown) {
+      this.player.body.x -= 3;
     }
     if (this.cursors.right.isDown) {
-      player.body.x += 3;
+      this.player.body.x += 3;
     }
   }
 
