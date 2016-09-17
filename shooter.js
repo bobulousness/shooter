@@ -13,9 +13,11 @@ class Boot {
     this.load.image('btrfly','btrfly.png');
   }
   badguys(x,y) {
-    this.btrfly = this.add.sprite(x,y,'btrfly');
-    this.btrfly = this.add.sprite(x += 46, y, 'btrfly');
+    this.btrfly = game.add.sprite(x,y,'btrfly');
+    this.btrfly = game.add.sprite(x += 46, y, 'btrfly');
   }
+  
+  
   create() {
     //physics
     game.physics.startSystem(Phaser.Physics.P2JS);
@@ -33,6 +35,11 @@ class Boot {
     }
     if (this.cursors.right.isDown) {
       this.player.body.x += 3;
+    }
+    if (this.btrfly.x = 280) {
+      this.btrfly.body.velocity.x = -4;
+    } else if (this.btrfly.x = 40) {
+      this.btrfly.body.velocity.x = 4;
     }
   }
 
