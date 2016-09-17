@@ -37,9 +37,9 @@ class Boot {
       this.player.body.x += 3;
     }
     if (this.btrfly.x = 280) {
-      this.btrfly.velocity.x = -4;
+      this.btrfly.body.velocity.x = -4;
     } else if (this.btrfly.x = 40) {
-      this.btrfly.velocity.x = 4;
+      this.btrfly.body.velocity.x = 4;
     }
   }
 
