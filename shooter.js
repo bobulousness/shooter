@@ -38,11 +38,10 @@ class Boot {
       this.player.body.x += 3;
     }
     if (this.btrfly.body.x = 280) {
-      this.btrfly.body.velocity.x = -40;
-      this.btrfly.body.y -= 46
+      this.btrfly.body.velocity.x = -14;
       console.log(this.btrfly.body)
     } else if (this.btrfly.body.x = 40) {
-      this.btrfly.body.velocity.x = 40;
+      this.btrfly.body.velocity.x = 14;
     }
   }
 
