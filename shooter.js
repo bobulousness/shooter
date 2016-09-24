@@ -14,7 +14,7 @@ class Boot {
   }
   badguys(x,y) {
     this.btrfly = game.add.sprite(x,y,'btrfly');
-    this.btrfly = game.add.sprite(x += 46, y, 'btrfly');
+    this.btrfly1 = game.add.sprite(x += 46, y, 'btrfly');
   }
   
   bullet() {
@@ -35,6 +35,7 @@ class Boot {
     //enemies
     this.badguys(40,30);
     game.physics.p2.enable(this.btrfly);
+    game.physics.p2.enable(this.btrfly1);
   }
   update() {
     if (this.cursors.left.isDown) {
