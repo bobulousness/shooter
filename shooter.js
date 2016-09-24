@@ -11,7 +11,7 @@ class Boot {
     this.load.image('bgud','bulgd.png');
     this.load.image('bbad','bulbd.png');
     this.load.image('btrfly','btrfly.png');
-    this.sprite.scale.x('bulgd.png');
+    
   }
   badguys(x,y) {
     this.btrfly = game.add.sprite(x,y,'btrfly');
@@ -20,9 +20,9 @@ class Boot {
   
   bullet() {
      this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y);
-     
-     game.physics.p2.enable(this.bulgd)
-     this.bulgd.body.velocity.x = 30
+     sprite.scale.setTo(3,6);
+     game.physics.p2.enable(this.bulgd);
+     this.bulgd.body.velocity.x = 30;
      
   }
   
