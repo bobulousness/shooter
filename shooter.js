@@ -29,6 +29,7 @@ class Boot {
     //enemies
     //this.badguys(40,30);
     this.btrfly = game.add.sprite(40,30,'btrfly');
+    game.physics.p2.enable(this.btrfly);
   }
   update() {
     if (this.cursors.left.isDown) {
