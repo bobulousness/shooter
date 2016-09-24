@@ -4,7 +4,7 @@ class Boot {
 
   init() {
     //creating variables
-
+  var velo = 20
   }
   preload() {
     this.load.image('bxtrm','beexterm.png');
@@ -17,6 +17,12 @@ class Boot {
     this.btrfly = game.add.sprite(x += 46, y, 'btrfly');
   }
   
+  bullet() {
+     this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y);
+     game.physics.p2.enable(this.bulgd)
+     this.bulgd.body.velocity.x = 30
+     
+  }
   
   create() {
     //physics
@@ -37,12 +43,17 @@ class Boot {
     if (this.cursors.right.isDown) {
       this.player.body.x += 3;
     }
-    if (this.btrfly.body.x = 280) {
+    if (this.cursors.up.isDown) {
+      this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y);
+      game.physics.p2.enable(this.bulgd)
+      
+    }
+    /*if (this.btrfly.body.x = 280) {
       this.btrfly.body.velocity.x = -14;
       console.log(this.btrfly.body)
     } else if (this.btrfly.body.x = 40) {
       this.btrfly.body.velocity.x = 14;
-    }
+    }*/
   }
 
 }
