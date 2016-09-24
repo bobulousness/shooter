@@ -20,7 +20,7 @@ class Boot {
   
   bullet() {
      this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y);
-     sprite.scale.setTo(3,6);
+     this.bulgd.scale.setTo(3,6);
      game.physics.p2.enable(this.bulgd);
      this.bulgd.body.velocity.x = 30;
      
