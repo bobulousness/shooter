@@ -39,6 +39,7 @@ class Boot {
     }
     if (this.btrfly.body.x = 280) {
       this.btrfly.body.velocity.x = -40;
+      console.log(this.btrfly.body)
     } else if (this.btrfly.body.x = 40) {
       this.btrfly.body.velocity.x = 40;
     }
