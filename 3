@@ -2,12 +2,6 @@
 var canShoot = true;
 var startTime = false;
 var baddudes;
-var bulcol;
-var enemycol;
-var pcol;
-var sidecol;
-var w;
-var elength;
 class Boot {
   
   init() {
@@ -24,25 +18,23 @@ class Boot {
   badguys(x,y) {
     baddudes = this.game.add.sprite(x,y,'btrfly');
     game.physics.p2.enable(baddudes);
-    w = 4
-    this.badbois(x,y);
+    this.badbois(4,x,y);
+    game.physics.p2.enable(baddudes.children[0,1,2,3]);
     baddudes.body.kinematic = true;
+    baddudes.children[0,1,2,3].body.kinematic = true;
     baddudes.body.velocity.x = -60;
-    elength = baddudes.children.length;
-    //collision groups
-    baddudes.body.setCollisionGroup(enemycol);
-    baddudes.body.collides(bulcol,this.death,this);
-    for (var i = 0; i < elength;i++) {
-      game.physics.p2.enable(baddudes.children[i]);
-      baddudes.children[i].body.setCollisionGroup(enemycol);
-      baddudes.children[i].body.collides(bulcol,this.death,this);
-      baddudes.children[i].body.kinematic = true;
-    }
+    
   }
-  badbois(x,y) {
+  badbois(w,x,y) {
     for (var i=0;i < w; i++) {
       var t = i * 46;
-      baddudes.addChild(game.add.sprite(x + t - 234, y-30, 'btrfly'));
+      console.log(t);
+      baddudes.addChild(game.add.sprite(x + t - 64, y - 46, 'btrfly'));
+      console.log(baddudes.children[i].y);
+      if (i===3) {
+        baddudes.children[3].x += 18;
+        baddudes.children[3].y += 15;
+      }
     }
   }
   
@@ -53,8 +45,6 @@ class Boot {
     game.physics.p2.enable(this.bulgd);
     this.bulgd.body.velocity.y = -120;
     this.bulgd.body.kinematic = true;
-    this.bulgd.body.setCollisionGroup(bulcol);
-    this.bulgd.body.collides(enemycol,this.death,this);
     this.bulletTimer();
   }
   
@@ -68,33 +58,26 @@ class Boot {
   nowTrue(c) {
     canShoot = true; 
   }
-  nowFalse() {
+  nowFalse(c) {
     startTime = true;
-  }
-
-  death(body1,body2) {
-    body1.destroy();
   }
   
   create() {
     //physics
     game.physics.startSystem(Phaser.Physics.P2JS);
-    //collision groups
-    enemycol = game.physics.p2.createCollisionGroup();
-    bulcol = game.physics.p2.createCollisionGroup();
-    pcol = game.physics.p2.createCollisionGroup();
     //player
     this.player = game.add.sprite(140,400,'bxtrm');
     game.physics.p2.enable(this.player);
     this.player.body.kinematic = true;
     this.cursors = game.input.keyboard.createCursorKeys();
-    this.player.body.setCollisionGroup(pcol);
     //enemies
-    this.badguys(280,30);
+    this.badguys(90,30);
+
     //starting delay
     var timer = game.time.create(true);
-    timer.loop(10000, this.nowFalse);
+    timer.loop(4000, this.nowFalse);
     timer.start();
+    console.log(46*5);
   }
   update() {
     if (this.cursors.left.isDown) {
@@ -111,26 +94,21 @@ class Boot {
         console.log("you cannot shoot!");
       }
     }
-    if (baddudes.body.x >= 270) {
+    if (baddudes.body.x <= 46) {
       baddudes.body.velocity.x = -60;
-      if (startTime === true){
-        baddudes.body.y += 46
-        for(var i = 0; i < w; i++) {
-          baddudes.children[i].body.velocity.x =-60;
-          baddudes.children[i].body.y += 46;
-        }
+     if (startTime === true){
+        baddudes.body.y += 46;
       }
-
+    console.log("it made it")
     } 
-    if (baddudes.children[3].body.x <= 46) {
+    /*if (baddudes.children[3].body.x >= 270) {
       baddudes.body.velocity.x = 60;
-      for (var i = 0; i < w;i++) {
+      for (i = 0; i < 4;i++) {
           baddudes.children[i].body.velocity.x = 60;
-          baddudes.children[i].body.y += 46;
+          baddudes.children[i].body.y += 42;
       }
       baddudes.body.y += 46;
-    }
-   
+    }*/
   }
 
 }
