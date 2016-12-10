@@ -1,12 +1,30 @@
 'use strict';
+//booleans
 var canShoot = true;
 var startTime = false;
+var goLeft = [];
+var useTime = [];
+var firsttime = false;
+//parent sprite
 var baddudes;
+//collision groups
 var bulcol;
 var enemycol;
 var pcol;
 var sidecol;
+var bbad;
+var killer;
+//arrays
+var enemyarray = [];
+var lv1S = [];
+var lv1L = [];
+var lv1DL = [];
+var lv1DR = [];
+var lv1R = [];
+var lv1E = [];
+//values
 var w;
+var q;
 var elength;
 class Boot {
   
@@ -19,81 +37,121 @@ class Boot {
     this.load.image('bgud','bulgd.png');
     this.load.image('bbad','bulbd.png');
     this.load.image('btrfly','btrfly.png');
-    
+    this.load.image('edge','blckstpvrt.png');
   }
-  badguys(x,y) {
-    baddudes = this.game.add.sprite(x,y,'btrfly');
-    game.physics.p2.enable(baddudes);
-    w = 4
+  badguys(x,y){
+    w = 10;
     this.badbois(x,y);
-    baddudes.body.kinematic = true;
-    baddudes.body.velocity.x = -60;
-    elength = baddudes.children.length;
-    //collision groups
-    baddudes.body.setCollisionGroup(enemycol);
-    baddudes.body.collides(bulcol,this.death,this);
-    for (var i = 0; i < elength;i++) {
-      game.physics.p2.enable(baddudes.children[i]);
-      baddudes.children[i].body.setCollisionGroup(enemycol);
-      baddudes.children[i].body.collides(bulcol,this.death,this);
-      baddudes.children[i].body.kinematic = true;
+    for ( q = 0; q<w;q++) {
+      var t = q*1000
+      useTime.push(0);
+      lv1S[q] = game.add.tween(enemyarray[q]).to({x:16},4000+t,Phaser.Easing.Linear.None,true,0);
+      lv1L[q] = game.add.tween(enemyarray[q]).to({x: 16},4000,Phaser.Easing.Linear.None,false,0);
+      lv1DL[q] = game.add.tween(enemyarray[q]).to({y: enemyarray[q].y+46},1000,Phaser.Easing.Linear.None,false,0);
+      lv1R[q] = game.add.tween(enemyarray[q]).to({x: 268},4000,Phaser.Easing.Linear.None,false,0);
+      lv1S[q].chain(lv1DL[q]);
+      lv1R[q].chain(lv1DR[q]);
+      lv1DR[q] = game.add.tween(enemyarray[q]).to({y: enemyarray[q].y+92},1000,Phaser.Easing.Linear.None,false,0);
+      lv1DL[q].chain(lv1R[q]);
+      lv1R[q].chain(lv1DR[q]);
+      lv1DR[q].chain(lv1L[q]);
+      lv1L[q].chain(lv1DL[q]);
     }
+    var badbulT = game.time.create(true);
+    badbulT.loop(4000,this.badFire);
+    badbulT.start();
   }
-  badbois(x,y) {
-    for (var i=0;i < w; i++) {
-      var t = i * 46;
-      baddudes.addChild(game.add.sprite(x + t - 234, y-30, 'btrfly'));
+
+   badFire() {
+     for (var i=0;i<w;i++) {
+       bbad = game.add.sprite(enemyarray[i].x+15.5,enemyarray[i].y+36,'bbad');
+       bbad.scale.setTo(3,6);
+       bbad.angle = 180;
+       killer = game.add.tween(bbad).to({y:600},5000,Phaser.Easing.Linear.None,true,0);
+       console.log("it is done");
+     }
+  }
+
+  badbois(x,y){
+    for(var i=0;i<w;i++){
+      //finish this up
+      var t = i*46 ;
+      enemyarray[i] = game.add.sprite(x+t,y,'btrfly');
+    }
+    console.log(enemyarray);
+  }
+  overlapCheck(g,h){
+    if(enemyarray[h].overlap(bulgd)) {
+      enemyarray[h].kill;
+      this.bulgd.kill;
     }
   }
   
   bullet() {
-    canShoot = false;
-    this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y - 33, 'bgud');
-    this.bulgd.scale.setTo(3,6);
-    game.physics.p2.enable(this.bulgd);
-    this.bulgd.body.velocity.y = -120;
-    this.bulgd.body.kinematic = true;
-    this.bulgd.body.setCollisionGroup(bulcol);
-    this.bulgd.body.collides(enemycol,this.death,this);
-    this.bulletTimer();
+    if (firsttime  === false){
+      this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y - 33, 'bgud');
+      this.bulgd.scale.setTo(3,6);
+      firsttime = true;
+      game.physics.p2.enable(this.bulgd);
+      this.bulgd.body.velocity.y = -120;
+      this.bulgd.autocull = true;
+      this.bulgd.outOfCameraKill
+    } else if (this.bulgd.inCamera === false){
+      this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y - 33, 'bgud');
+      this.bulgd.scale.setTo(3,6);
+      game.physics.p2.enable(this.bulgd);
+      this.bulgd.body.velocity.y = -120;
+    }else {
+      console.log("no fire");
+    }
   }
+
   
   bulletTimer() {
     game.time.removeAll();
     var timer = game.time.create(true);
-    timer.loop(4000,this.nowTrue);
+    timer.add(4000,this.nowTrue);
     timer.start();
   }
   
   nowTrue(c) {
     canShoot = true; 
   }
-  nowFalse() {
+  starter() {
     startTime = true;
+    console.log("game start");
   }
 
+
   death(body1,body2) {
-    body1.destroy();
+    body1.sprite.kill();
+    body2.sprite.kill();
+    console.log("boom");
   }
   
   create() {
     //physics
     game.physics.startSystem(Phaser.Physics.P2JS);
-    //collision groups
+    //collision group 
+    game.physics.p2.setImpactEvents(true);
+    game.physics.p2.updateBoundsCollisionGroup();
+    game.physics.p2.restitution = 0.8;
     enemycol = game.physics.p2.createCollisionGroup();
     bulcol = game.physics.p2.createCollisionGroup();
     pcol = game.physics.p2.createCollisionGroup();
+    sidecol = game.physics.p2.createCollisionGroup();
     //player
-    this.player = game.add.sprite(140,400,'bxtrm');
+    this.player = game.add.sprite(140,500,'bxtrm');
     game.physics.p2.enable(this.player);
     this.player.body.kinematic = true;
     this.cursors = game.input.keyboard.createCursorKeys();
     this.player.body.setCollisionGroup(pcol);
+    this.player.body.collideWorldBounds = true;
     //enemies
-    this.badguys(280,30);
+    this.badguys(260,30);
     //starting delay
     var timer = game.time.create(true);
-    timer.loop(10000, this.nowFalse);
+    timer.add(4000, this.starter);
     timer.start();
   }
   update() {
@@ -106,33 +164,16 @@ class Boot {
     if (this.cursors.up.isDown) {
       if (canShoot === true) {
         this.bullet();
-        console.log("fire");
-      }else {
-        console.log("you cannot shoot!");
       }
     }
-    if (baddudes.body.x >= 270) {
-      baddudes.body.velocity.x = -60;
-      if (startTime === true){
-        baddudes.body.y += 46
-        for(var i = 0; i < w; i++) {
-          baddudes.children[i].body.velocity.x =-60;
-          baddudes.children[i].body.y += 46;
-        }
-      }
+    if (this.player.overlap(bbad)) {
+      this.player.kill;
+      this.bbad.kill;
+    }
+  
 
-    } 
-    if (baddudes.children[3].body.x <= 46) {
-      baddudes.body.velocity.x = 60;
-      for (var i = 0; i < w;i++) {
-          baddudes.children[i].body.velocity.x = 60;
-          baddudes.children[i].body.y += 46;
-      }
-      baddudes.body.y += 46;
-    }
-   
+  enemyarray.foreach(this.overlapCheck);
   }
-
 }
 
 
