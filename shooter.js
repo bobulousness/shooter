@@ -5,6 +5,8 @@ var startTime = false;
 var goLeft = [];
 var useTime = [];
 var firsttime = false;
+var existg = false;
+var existb = false;
 //parent sprite
 var baddudes;
 //collision groups
@@ -26,6 +28,8 @@ var lv1E = [];
 var w;
 var q;
 var elength;
+
+
 class Boot {
   
   init() {
@@ -69,7 +73,12 @@ class Boot {
        bbad.angle = 180;
        killer = game.add.tween(bbad).to({y:600},5000,Phaser.Easing.Linear.None,true,0);
        console.log("it is done");
-     }
+       existb = true;
+      }
+}
+  eg() {
+    existg = false;
+    console.log("now is false");
   }
 
   badbois(x,y){
@@ -81,9 +90,11 @@ class Boot {
     console.log(enemyarray);
   }
   overlapCheck(g,h){
-    if(enemyarray[h].overlap(bulgd)) {
-      enemyarray[h].kill;
-      this.bulgd.kill;
+    console.log(g);
+    console.log(h);
+    if(enemyarray[h] != 0 && g.overlap(game.state.states.Play.bulgd)) {
+      enemyarray[h] = 0;
+      game.state.states.Play.bulgd.destroy();
     }
   }
   
@@ -95,17 +106,19 @@ class Boot {
       game.physics.p2.enable(this.bulgd);
       this.bulgd.body.velocity.y = -120;
       this.bulgd.autocull = true;
-      this.bulgd.outOfCameraKill
+      this.bulgd.outOfCameraKill;
+      existg = true;
+      if (this.bulgd.inCamera === false) {
+         existg = false;
+      }
     } else if (this.bulgd.inCamera === false){
       this.bulgd = game.add.sprite(this.player.body.x,this.player.body.y - 33, 'bgud');
       this.bulgd.scale.setTo(3,6);
       game.physics.p2.enable(this.bulgd);
       this.bulgd.body.velocity.y = -120;
-    }else {
-      console.log("no fire");
     }
   }
-
+//find some way to try to get a bullet existence variable to be false
   
   bulletTimer() {
     game.time.removeAll();
@@ -115,7 +128,7 @@ class Boot {
   }
   
   nowTrue(c) {
-    canShoot = true; 
+    canShoot = true;
   }
   starter() {
     startTime = true;
@@ -143,9 +156,7 @@ class Boot {
     //player
     this.player = game.add.sprite(140,500,'bxtrm');
     game.physics.p2.enable(this.player);
-    this.player.body.kinematic = true;
-    this.cursors = game.input.keyboard.createCursorKeys();
-    this.player.body.setCollisionGroup(pcol);
+    this.cursors = game.input.keyboard.createCursorKeys(); 
     this.player.body.collideWorldBounds = true;
     //enemies
     this.badguys(260,30);
@@ -166,13 +177,18 @@ class Boot {
         this.bullet();
       }
     }
-    if (this.player.overlap(bbad)) {
-      this.player.kill;
-      this.bbad.kill;
+    if (existb === true) {
+        
+      if(this.player.overlap(bbad)) {
+        this.player.kill();
+        bbad.kill();
+        console.log("whyyyyyy");
+      }
     }
-  
-
-  enemyarray.foreach(this.overlapCheck);
+    if (existg === true){
+     enemyarray.forEach(this.overlapCheck);
+      
+    }
   }
 }
 
