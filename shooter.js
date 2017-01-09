@@ -90,9 +90,9 @@ class Boot {
     console.log(enemyarray);
   }
   overlapCheck(g,h){
-    console.log(g);
-    console.log(h);
-    if(enemyarray[h] != 0 && g.overlap(game.state.states.Play.bulgd)) {
+    var E = enemyarray[h].getBounds();
+    var B = game.state.states.Play.bulgd.getBounds();
+    if(Phaser.Rectangle.intersects(B,E)) {
       enemyarray[h] = 0;
       game.state.states.Play.bulgd.destroy();
     }
@@ -104,6 +104,7 @@ class Boot {
       this.bulgd.scale.setTo(3,6);
       firsttime = true;
       game.physics.p2.enable(this.bulgd);
+      //try replacing line 108 with tween
       this.bulgd.body.velocity.y = -120;
       this.bulgd.autocull = true;
       this.bulgd.outOfCameraKill;
